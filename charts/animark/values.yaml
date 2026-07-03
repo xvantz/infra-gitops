@@ -1,15 +1,13 @@
-# Prod values for animark
-# Image tag is set by CI/CD pipeline (push model)
-
+# Default values (prod-oriented)
 replicaCount: 2
 
 image:
   repository: git.827482.xyz/xvantz/animark
-  tag: v0.0.0  # overwritten by CI
+  tag: latest
   pullPolicy: Always
 
 nameOverride: ""
-fullnameOverride: "animark"
+fullnameOverride: ""
 
 service:
   type: ClusterIP

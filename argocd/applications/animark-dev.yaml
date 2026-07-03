@@ -10,7 +10,7 @@ spec:
   project: cluster
   source:
     repoURL: 'https://git.827482.xyz/xvantz/infra-gitops'
-    path: apps/animark
+    path: charts/animark
     targetRevision: main
     helm:
       valueFiles:

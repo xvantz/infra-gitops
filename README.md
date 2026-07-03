@@ -4,7 +4,7 @@ GitOps-репозиторий для Kubernetes-кластера на базе k
 
 Назначение:
 - Декларативное описание всей инфраструктуры кластера через ArgoCD
-- Helm values для приложений
+- Helm chart'ы приложений + environment-specific values
 - Мониторинг (VictoriaMetrics, VictoriaLogs, Grafana, Alertmanager)
 - Секреты зашифрованы через SOPS + age
 
@@ -12,7 +12,7 @@ GitOps-репозиторий для Kubernetes-кластера на базе k
 
 ```
 argocd/applications/     — Application-ресурсы ArgoCD
-apps/                    — values-файлы приложений
+charts/*/                — Helm chart'ы приложений
 monitoring/              — values-файлы мониторинга
 ```
 

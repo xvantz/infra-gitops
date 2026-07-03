@@ -1,23 +1,11 @@
-# Dev values for animark
-# Image is auto-updated by argocd-image-updater
-
+# Dev overrides
 replicaCount: 1
 
 image:
-  repository: git.827482.xyz/xvantz/animark
   tag: latest
   pullPolicy: Always
 
-nameOverride: ""
-fullnameOverride: "animark"
-
-service:
-  type: ClusterIP
-  port: 8080
-
 ingress:
-  enabled: true
-  className: traefik
   host: animark-dev.827482.xyz
 
 resources:
