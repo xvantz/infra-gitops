@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: animark-dev
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: animark=git.827482.xyz/xvantz/animark
+    argocd-image-updater.argoproj.io/animark.update-strategy: latest
+spec:
+  project: cluster
+  source:
+    repoURL: 'https://git.827482.xyz/xvantz/infra-gitops'
+    path: apps/animark
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-dev.yaml
+        - values-dev.secret.enc.yaml
+  destination:
+    namespace: animark-dev
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

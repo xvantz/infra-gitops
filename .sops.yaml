@@ -1,0 +1,9 @@
+# SOPS configuration
+# Age keys will be added after generation
+creation_rules:
+  - path_regex: apps/.*/dev/.*\.enc\.yaml
+    age: age1...  # dev key
+  - path_regex: apps/.*/prod/.*\.enc\.yaml
+    age: age1...  # prod key
+  - path_regex: apps/.*/staging/.*\.enc\.yaml
+    age: age1...  # dev key (shared)

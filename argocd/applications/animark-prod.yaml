@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: animark-prod
+  namespace: argocd
+spec:
+  project: cluster
+  source:
+    repoURL: 'https://git.827482.xyz/xvantz/infra-gitops'
+    path: apps/animark
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-prod.yaml
+        - values-prod.secret.enc.yaml
+  destination:
+    namespace: animark-prod
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

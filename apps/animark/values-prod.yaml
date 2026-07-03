@@ -1,0 +1,34 @@
+# Prod values for animark
+# Image tag is set by CI/CD pipeline (push model)
+
+replicaCount: 2
+
+image:
+  repository: git.827482.xyz/xvantz/animark
+  tag: v0.0.0  # overwritten by CI
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: "animark"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  className: traefik
+  host: animark.827482.xyz
+
+resources:
+  limits:
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+env:
+  - name: ANIMARK_ENV
+    value: production
+  - name: LOG_LEVEL
+    value: info
