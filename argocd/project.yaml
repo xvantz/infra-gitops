@@ -9,6 +9,8 @@ spec:
     - 'https://git.827482.xyz/xvantz/infra-gitops'
     - 'https://git.827482.xyz/xvantz/animark'
   destinations:
+    - namespace: 'argocd'
+      server: 'https://kubernetes.default.svc'
     - namespace: 'animark-dev'
       server: 'https://kubernetes.default.svc'
     - namespace: 'animark-prod'
