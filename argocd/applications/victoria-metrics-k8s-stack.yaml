@@ -87,14 +87,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
-        # Disable kube-system service scraping (single-node, no HA)
-        kubeControllerManager:
-          enabled: false
-        kubeEtcd:
-          enabled: false
-        kubeScheduler:
-          enabled: false
-        kubeProxy:
-          enabled: false
-        coreDns:
-          enabled: false
