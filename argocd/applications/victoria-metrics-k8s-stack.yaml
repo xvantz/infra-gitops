@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoria-metrics-k8s-stack
+  namespace: argocd
+spec:
+  project: cluster
+  source:
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    chart: victoria-metrics-k8s-stack
+    targetRevision: 0.85.10
+    helm:
+      values: |
+        # Metrics database
+        vmsingle:
+          enabled: true
+          spec:
+            retentionPeriod: "4w"
+            storage:
+              resources:
+                requests:
+                  storage: 20Gi
+
+        # Metrics scraper
+        vmagent:
+          enabled: true
+          spec:
+            replicaCount: 1
+
+        # Operator (manages CRDs like VMSingle, VMAgent, VMServiceScrape)
+        victoria-metrics-operator:
+          enabled: true
+
+        # Grafana with dashboards
+        grafana:
+          enabled: true
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            hosts:
+              - grafana.827482.xyz
+          adminPassword: admin
+          grafana.ini:
+            server:
+              root_url: https://grafana.827482.xyz
+            auth:
+              disable_login_form: false
+            auth.anonymous:
+              enabled: true
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+
+        # Kubernetes state metrics
+        kube-state-metrics:
+          enabled: true
+
+        # Node metrics
+        prometheus-node-exporter:
+          enabled: true
+
+        # Pre-built alerting and recording rules
+        defaultRules:
+          enabled: true
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
