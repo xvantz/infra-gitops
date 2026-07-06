@@ -62,6 +62,18 @@ spec:
         prometheus-node-exporter:
           enabled: true
 
+        # Disable scraping of kube-system components (single-node, no HA)
+        kubeControllerManager:
+          enabled: false
+        kubeEtcd:
+          enabled: false
+        kubeScheduler:
+          enabled: false
+        kubeProxy:
+          enabled: false
+        coreDns:
+          enabled: false
+
         # Pre-built alerting and recording rules
         defaultRules:
           enabled: true
@@ -75,3 +87,14 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
+        # Disable kube-system service scraping (single-node, no HA)
+        kubeControllerManager:
+          enabled: false
+        kubeEtcd:
+          enabled: false
+        kubeScheduler:
+          enabled: false
+        kubeProxy:
+          enabled: false
+        coreDns:
+          enabled: false
