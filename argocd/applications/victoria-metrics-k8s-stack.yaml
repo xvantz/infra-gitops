@@ -32,7 +32,7 @@ spec:
           enabled: true
           nameOverride: vmop
 
-        # Grafana with dashboards
+        # Grafana with dashboards and log datasource
         grafana:
           enabled: true
           ingress:
@@ -48,6 +48,17 @@ spec:
               disable_login_form: false
             auth.anonymous:
               enabled: true
+          plugins:
+            - victorialogs-datasource
+          datasources:
+            datasources.yaml:
+              apiVersion: 1
+              datasources:
+                - name: VictoriaLogs
+                  type: victorialogs-datasource
+                  url: http://vls-victoria-logs-single-server.monitoring:9428
+                  access: proxy
+                  isDefault: false
           resources:
             limits:
               memory: 256Mi
