@@ -54,6 +54,10 @@ spec:
             requests:
               cpu: 50m
               memory: 128Mi
+          sidecar:
+            dashboards:
+              enabled: true
+              label: grafana_dashboard
 
         # Kubernetes state metrics
         kube-state-metrics:
