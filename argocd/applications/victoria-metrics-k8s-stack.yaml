@@ -30,6 +30,7 @@ spec:
         # Operator (manages CRDs like VMSingle, VMAgent, VMServiceScrape)
         victoria-metrics-operator:
           enabled: true
+          nameOverride: vmop
 
         # Grafana with dashboards
         grafana:
