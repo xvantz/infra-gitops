@@ -6,7 +6,7 @@ metadata:
 spec:
   project: cluster
   source:
-    repoURL: https://victoriametrics.github.io/helm-charts/
+    repoURL: https://victoriametrics.github.io/helm-charts
     chart: victoria-logs-single
     targetRevision: 0.13.8
     helm:
